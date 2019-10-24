@@ -18,11 +18,17 @@
   </ion-item>
 
   <ion-list>
-    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'movies', item.imdbId]">
+    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'movies', item.imdbID]">
       <ion-thumbnail slot="start">
-          <ion-img [src]="item.Poster"></ion-img>
-        </ion-thumbnail>
-      {{ item.Title }}
+        <ion-img [src]="item.Poster" *ngIf="item.Poster != 'N/A'"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+          <h2>{{ item.Title }}</h2>
+          <p><ion-text color="danger">{{ item.Year }}</ion-text></p>
+      </ion-label>
+        <ion-icon *ngIf="item.Type == 'movie'" name="videocam" slot="end"></ion-icon>
+        <ion-icon *ngIf="item.Type == 'series'" name="tv" slot="end"></ion-icon>
+        <ion-icon *ngIf="item.Type == 'game'" name="logo-game-controller-b" slot="end"></ion-icon>
     </ion-item>
   </ion-list>
 
